@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Currency Rate Graph</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+  .hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    background-image: url('canada d.jpg'); /* Replace with your image URL */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    z-index: 1;
+  }
+
+  .hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity */
+    z-index: -1; /* Puts the overlay behind the content */
+  }
+
+  .hero-content {
+    text-align: center;
+    z-index: 2;
+  }
+
+  .hero-content h1 {
+    font-size: 3rem;
+  }
+
+  .hero-content p {
+    font-size: 1.2rem;
+  }
+</style>
+
+<section class="hero-section">
+  <div class="hero-content">
+    <h1>Welcome to Our Site</h1>
+    <p>Discover quality and style</p>
+  </div>
+</section>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #aed4db;
+      padding: 20px;
+    }
+
+    .graph-container {
+      max-width: 700px;
+      margin: auto;
+      background: rgb(213, 230, 231);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+
+    canvas {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Media Queries for Responsiveness */
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 1.6rem;
+        margin-bottom: 15px;
+      }
+      .graph-container {
+        padding: 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h2 {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+      }
+      .graph-container {
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="graph-container">
+  <h2>USD to EUR - Last 7 Days</h2>
+  <canvas id="rateChart"></canvas>
+</div>
+
+<script>
+  // Simulated data - replace with API data in production
+  const labels = ["May 4", "May 5", "May 6", "May 7", "May 8", "May 9", "May 10"];
+  const rates = [0.925, 0.927, 0.929, 0.931, 0.930, 0.932, 0.934];
+
+  const ctx = document.getElementById('rateChart').getContext('2d');
+  const rateChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Exchange Rate (USD → EUR)',
+        data: rates,
+        borderColor: '#007bff',
+        backgroundColor: 'rgba(0, 123, 255, 0.1)',
+        fill: true,
+        tension: 0.4,
+        pointRadius: 4,
+        pointBackgroundColor: '#007bff'
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          title: {
+            display: true,
+            text: 'Rate'
+          },
+          beginAtZero: false
+        },
+        x: {
+          title: {
+            display: true,
+            text: 'Date'
+          }
+        }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

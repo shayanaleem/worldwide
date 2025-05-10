@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Responsive Professional Website Template" />
+  <title>Global Currency Converter & List</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Select2 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+  <style>
+    
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      background-color: #c8ecf5;
+    }
+    .navbar {
+      background-color: #e7e1bc;
+    }
+    .navbar-brand, .nav-link {
+      color: rgb(238, 229, 229) !important;
+    }
+    .navbar-brand:hover, .nav-link:hover {
+      color: #ffd700 !important;
+    }
+    .hero-section {
+      background: linear-gradient(135deg, #b47706, #2b6a72);
+      color: rgb(252, 251, 251);
+      padding: 100px 0;
+      text-align: center;
+    }
+    .container.converter {
+      max-width: 500px;
+      margin: 80px auto;
+      padding: 30px;
+      background-color: #a2bebd;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(163, 71, 71, 0.1);
+    }
+    .converter h1 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #02102e;
+    }
+    .field {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    select, input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      background-color: #0077cc;
+      color: rgb(255, 255, 255);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+    .b:hover{
+      color: #e6ad12;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+    }
+    .img-flag {
+      width: 20px;
+      height: 15px;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    .currency-list {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .currency-list h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #021e31;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #91e5eb;
+    }
+
+    .flag {
+      width: 24px;
+      height: 18px;
+      vertical-align: middle;
+      margin-right: 10px;
+      border-radius: 2px;
+    }
+
+    @media (max-width: 600px) {
+      .container, .currency-list {
+        margin: 20px;
+        padding: 20px;
+      }
+
+      table, th, td {
+        font-size: 14px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-dark bg-dark fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">World-Wide Currency</a>
+    <ul class="navbar-nav ms-auto d-flex flex-row">
+        <li class="nav-item px-3">
+          <a class="nav-link" href="#converter">Converter</a>
+        </li>
+        <li class="nav-item px-3">
+          <a class="nav-link" href="#currencyList">Currency List</a>
+        </li>
+        <li class="nav-item dropdown px-3">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          </a>
+         
+        </li>
+      </ul>
+      
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+    }
+
+    .hero-section {
+      background-image: url('pexels-ryutaro-5746260.jpg'); /* Replace with your image */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      color: white;
+    }
+
+    .hero-section h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .hero-section p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      font-size: 1rem;
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #333;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #ddd;
+    }
+
+    /* Responsive text sizes for smaller screens */
+    @media (max-width: 768px) {
+      .hero-section h1 {
+        font-size: 2rem;
+      }
+      .hero-section p {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-section h1 {
+        font-size: 1.5rem;
+      }
+      .hero-section p {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<section id="home" class="hero-section">
+  <h1 class="b">Welcome to Global Currency Rates</h1>
+  <p>Your solution for all currencies worldwide</p>
+  <a href="services.html" class="btn">Explore Our Services</a>
+</section>
+
+</body>
+
+<!-- Currency Converter -->
+<div id="converter" class="container converter">
+  <h1>Currency Converter</h1>
+  <div class="field">
+    <label for="fromCurrency">From:</label>
+    <select id="fromCurrency" class="currency-select"></select>
+  </div>
+  <div class="field">
+    <label for="toCurrency">To:</label>
+    <select id="toCurrency" class="currency-select"></select>
+  </div>
+  <div class="field">
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" value="1" min="0" />
+  </div>
+  <button onclick="convert()">Convert</button>
+  <div id="result"></div>
+</div>
+<div class="container my-5">
+  <h4 class="text-center mb-4">Exchange Rate: USD to INR (Past 7 Days)</h4>
+  <canvas id="exchangeRateChart" width="400" height="200"></canvas>
+</div>
+
+<!-- Currency List -->
+<div id="currencyList" class="currency-list">
+  <h1>Global Currencies List</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Flag</th>
+        <th>Currency Code</th>
+        <th>Currency Name</th>
+      </tr>
+    </thead>
+    <tbody id="currencyTableBody">
+      <!-- Currency list rows will be injected here -->
+    </tbody>
+  </table>
+</div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+  const currencyToCountry = {
+    USD: "us", INR: "in", EUR: "eu", GBP: "gb", AUD: "au", CAD: "ca", JPY: "jp",
+    CNY: "cn", NZD: "nz", CHF: "ch", SEK: "se", SGD: "sg", HKD: "hk", KRW: "kr",
+    AED: "ae", BRL: "br", ZAR: "za", PKR: "pk", TRY: "tr", MXN: "mx", RUB: "ru",
+    THB: "th", IDR: "id", MYR: "my"
+  };
+
+  const currencyNames = {
+    USD: "US Dollar", EUR: "Euro", GBP: "British Pound", INR: "Indian Rupee",
+    JPY: "Japanese Yen", CNY: "Chinese Yuan", AUD: "Australian Dollar",
+    CAD: "Canadian Dollar", CHF: "Swiss Franc", SEK: "Swedish Krona",
+    NZD: "New Zealand Dollar", AED: "UAE Dirham", BRL: "Brazilian Real",
+    ZAR: "South African Rand", PKR: "Pakistani Rupee", TRY: "Turkish Lira",
+    MXN: "Mexican Peso", RUB: "Russian Ruble", THB: "Thai Baht",
+    IDR: "Indonesian Rupiah", MYR: "Malaysian Ringgit", SGD: "Singapore Dollar",
+    HKD: "Hong Kong Dollar", KRW: "South Korean Won"
+  };
+
+  function getFlagURL(currencyCode) {
+    const code = currencyToCountry[currencyCode];
+    return code ? `https://flagcdn.com/24x18/${code}.png` : "";
+  }
+
+  function formatOption(option) {
+    if (!option.id) return option.text;
+    const flag = getFlagURL(option.id);
+    return $(`<span><img src="${flag}" class="img-flag" /> ${option.text}</span>`);
+  }
+
+  async function populateCurrencies() {
+    try {
+      const response = await fetch('https://open.er-api.com/v6/latest/USD');
+      const data = await response.json();
+      const currencies = Object.keys(data.rates);
+      currencies.forEach(currency => {
+        const option = new Option(currency, currency, false, false);
+        $('#fromCurrency, #toCurrency').append(option);
+      });
+      $('#fromCurrency').val('USD').trigger('change');
+      $('#toCurrency').val('INR').trigger('change');
+    } catch (error) {
+      $('#result').text("Failed to load currencies.");
+    }
+  }
+
+  function initSelect2() {
+    $('.currency-select').select2({
+      templateResult: formatOption,
+      templateSelection: formatOption,
+      width: '100%'
+    });
+  }
+
+  async function convert() {
+    const from = $('#fromCurrency').val();
+    const to = $('#toCurrency').val();
+    const amount = parseFloat($('#amount').val());
+
+    if (isNaN(amount) || amount <= 0) {
+      $('#result').text("Please enter a valid amount.");
+      return;
+    }
+
+    try {
+      const res = await fetch(`https://open.er-api.com/v6/latest/${from}`);
+      const data = await res.json();
+      const rate = data.rates[to];
+      const result = (amount * rate).toFixed(2);
+      $('#result').text(`${amount} ${from} = ${result} ${to}`);
+    } catch (error) {
+      $('#result').text("Conversion failed. Try again later.");
+    }
+  }
+
+  function populateCurrencyList() {
+    const tbody = document.getElementById("currencyTableBody");
+    for (const code in currencyToCountry) {
+      const country = currencyToCountry[code];
+      const name = currencyNames[code] || code;
+      const flagUrl = `https://flagcdn.com/24x18/${country}.png`;
+
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td><img class="flag" src="${flagUrl}" alt="${code} Flag" /></td>
+        <td>${code}</td>
+        <td>${name}</td>
+      `;
+      tbody.appendChild(row);
+    }
+  }
+
+  $(document).ready(() => {
+    populateCurrencies().then(initSelect2);
+    populateCurrencyList();
+  });
+</script>
+<!-- History of Currencies -->
+<div class="container my-5">
+  <h2 class="text-center mb-4">History of Currencies</h2>
+  <div class="row">
+    <!-- Card 1 -->
+    <div class="col-12 col-sm-4 mb-4">
+      <div class="card" style="width: 100%; height: 250px;">
+        <a href="https://en.wikipedia.org/wiki/History_of_the_rupee"><img src="rupees.webp" class="card-img-top" alt="Image 1" style="height: 200px; object-fit: cover;"></a>
+        <div class="card-body">
+          <h5 class="card-title">Indian Rupees</h5>
+          <p class="card-text">India.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="col-12 col-sm-4 mb-4">
+      <div class="card" style="width: 100%; height: 250px;">
+        <a href="https://en.wikipedia.org/wiki/History_of_the_United_States_dollar"><img src="usa d.jpg" class="card-img-top" alt="Image 2" style="height: 200px; object-fit: cover;"></a>
+        <div class="card-body">
+          <h5 class="card-title">Dollar</h5>
+          <p class="card-text">United State America.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="col-12 col-sm-4 mb-4">
+      <div class="card" style="width: 100%; height: 250px;">
+        <a href="https://en.wikipedia.org/wiki/History_of_Australian_currency"><img src="canada d.jpg" class="card-img-top" alt="Image 3" style="height: 200px; object-fit: cover;"></a>
+        <div class="card-body">
+          <h5 class="card-title">Australian Dollar</h5>
+          <p class="card-text">Australia</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container my-5">
+  <h2 class="text-center mb-4"></h2>
+  <div class="row">
+    <!-- Card 1 -->
+    <div class="col-12 col-sm-4 mb-4">
+      <div class="card" style="width: 100%; height: 250px;">
+        <a href="https://en.wikipedia.org/wiki/Pound_sterling"><img src="pound.webp" class="card-img-top" alt="Image 1" style="height: 200px; object-fit: cover;"></a>
+        <div class="card-body">
+          <h5 class="card-title">Pound Sterling</h5>
+          <p class="card-text">United Kingdom.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="col-12 col-sm-4 mb-4">
+      <div class="card" style="width: 100%; height: 250px;">
+        <a href="https://en.wikipedia.org/wiki/Euro"><img src="euro.jpg" class="card-img-top" alt="Image 2" style="height: 200px; object-fit: cover;"></a>
+        <div class="card-body">
+          <h5 class="card-title">Euro</h5>
+          <p class="card-text">Europe.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="col-12 col-sm-4 mb-4">
+      <div class="card" style="width: 100%; height: 250px;">
+        <a href="https://en.wikipedia.org/wiki/Swiss_franc"><img src="swiss.jpg" class="card-img-top" alt="Image 3" style="height: 200px; object-fit: cover;"></a>
+        <div class="card-body">
+          <h5 class="card-title">Swiss Franc</h5>
+          <p class="card-text">Switzerland.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container my-5">
+  <h2 class="text-center mb-4"></h2>
+  <div class="row">
+    <!-- Card 1 -->
+    <div class="col-12 col-sm-4 mb-4">
+      <div class="card" style="width: 100%; height: 250px;">
+        <a href="https://en.wikipedia.org/wiki/Saudi_riyal#:~:text=The%20riyal%20has%20been%20the,region%20during%20the%20Ottoman%20era."><img src="riyal.jpg" class="card-img-top" alt="Image 1" style="height: 200px; object-fit: cover;"></a>
+        <div class="card-body">
+          <h5 class="card-title">Saudi Riyal</h5>
+          <p class="card-text">Kingdom of Saudi Arabia.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="col-12 col-sm-4 mb-4">
+      <div class="card" style="width: 100%; height: 250px;">
+        <a href="https://simple.wikipedia.org/wiki/Kuwaiti_dinar#:~:text=The%20first%20Kuwaiti%20dinar%20was,Council%20on%20April%2011%2C%201961.&text=Bank%20of%20AmericaThe%20World%20Factbook%2C%202017%20est.&text=The%20first%20twenty%20dinars%20banknote,of%20which%20was%20in%202014."><img src="dinar.webp" class="card-img-top" alt="Image 2" style="height: 200px; object-fit: cover;"></a>
+        <div class="card-body">
+          <h5 class="card-title">Kuwait Dinar</h5>
+          <p class="card-text">Kuwait.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="col-12 col-sm-4 mb-4">
+      <div class="card" style="width: 100%; height: 250px;">
+        <a href="https://en.wikipedia.org/wiki/United_Arab_Emirates_dirham"><img src="Gulf-currencies-rupee.jpg" class="card-img-top" alt="Image 3" style="height: 200px; object-fit: cover;"></a>
+        <div class="card-body">
+          <h5 class="card-title">Dhirham</h5>
+          <p class="card-text">United Arab Emirates.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container my-5">
+  <h2 class="text-center mb-4"></h2>
+  <div class="row">
+    <!-- Card 1 -->
+    <div class="col-12 col-sm-4 mb-4">
+      <div class="card" style="width: 100%; height: 250px;">
+        <a href="https://en.wikipedia.org/wiki/Omani_rial"><img src="omani.jpg" class="card-img-top" alt="Image 1" style="height: 200px; object-fit: cover;"></a>
+        <div class="card-body">
+          <h5 class="card-title">Omani Riyal</h5>
+          <p class="card-text">Oman.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="col-12 col-sm-4 mb-4">
+      <div class="card" style="width: 100%; height: 250px;">
+        <a href="https://en.wikipedia.org/wiki/History_of_Chinese_currency"><img src="china.jpg" class="card-img-top" alt="Image 2" style="height: 200px; object-fit: cover;"></a>
+        <div class="card-body">
+          <h5 class="card-title">Chinese Yuan</h5>
+          <p class="card-text">China.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="col-12 col-sm-4 mb-4">
+      <div class="card" style="width: 100%; height: 250px;">
+        <a href="https://en.wikipedia.org/wiki/Malaysian_ringgit#:~:text=The%20first%20series%20of%20sen,in%20the%20series)%20in%201971."><img src="malasia.jpg" class="card-img-top" alt="Image 3" style="height: 200px; object-fit: cover;"></a>
+        <div class="card-body">
+          <h5 class="card-title">Malaysian Ringgit</h5>
+          <p class="card-text">Malaysia.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container my-5">
+  <h2 class="text-center mb-4"></h2>
+  <div class="row">
+    <!-- Card 1 -->
+    <div class="col-12 col-sm-4 mb-4">
+      <div class="card" style="width: 100%; height: 250px;">
+        <a href="https://en.wikipedia.org/wiki/Canadian_dollar"><img src="canada d.jpg" class="card-img-top" alt="Image 1" style="height: 200px; object-fit: cover;"></a>
+        <div class="card-body">
+          <h5 class="card-title">Canadian Dollar</h5>
+          <p class="card-text">Canada.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="col-12 col-sm-4 mb-4">
+      <div class="card" style="width: 100%; height: 250px;">
+        <a href="https://en.wikipedia.org/wiki/Canadian_dollar"><img src="lira.jpg" class="card-img-top" alt="Image 2" style="height: 200px; object-fit: cover;"></a>
+        <div class="card-body">
+          <h5 class="card-title">Turkish Lira</h5>
+          <p class="card-text">Turkey.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="col-12 col-sm-4 mb-4">
+      <div class="card" style="width: 100%; height: 250px;">
+        <a href="https://en.wikipedia.org/wiki/Sri_Lankan_rupee"><img src="srilankan-rupee.jpg" class="card-img-top" alt="Image 3" style="height: 200px; object-fit: cover;"></a>
+        <div class="card-body">
+          <h5 class="card-title">Sinhala</h5>
+          <p class="card-text">Sri Lanka.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="bg-dark text-light py-4 mt-5">
+  <div class="container text-center">
+    <p class="mb-1">&copy; 2025 Global Currency Converter. All rights reserved.</p>
+    <p class="small mb-0">Made by Shayan Aleem</p>
+  </div>
+</footer>
+<script>
+  const ctx = document.getElementById('exchangeRateChart').getContext('2d');
+
+  const exchangeRateChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['May 4', 'May 5', 'May 6', 'May 7', 'May 8', 'May 9', 'May 10'],
+      datasets: [{
+        label: 'USD to INR',
+        data: [83.12, 83.20, 83.15, 83.18, 83.22, 83.30, 83.25], // Replace with real data
+        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        fill: true,
+        tension: 0.3,
+        pointRadius: 4,
+        pointHoverRadius: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        tooltip: {
+          mode: 'index',
+          intersect: false,
+        },
+        title: {
+          display: false
+        }
+      },
+      interaction: {
+        mode: 'nearest',
+        axis: 'x',
+        intersect: false
+      },
+      scales: {
+        y: {
+          beginAtZero: false
+        }
+      }
+    }
+  });
+</script>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Currency News Updates</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      background-color: #d7e1e2;
+      color: #333;
+    }
+
+    .news-section {
+      padding: 60px 20px;
+      background: #eef2f7;
+    }
+
+    .news-section h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      color: #343a40;
+      margin-bottom: 40px;
+    }
+
+    .news-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .news-card {
+      background-color: #d8e7e7;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .news-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+      background-color: #007bff;
+      color: #fff;
+      padding: 15px;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .card-body {
+      padding: 20px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    .card-footer {
+      background-color: #b4e9f0;
+      text-align: center;
+      padding: 10px;
+      font-size: 0.9rem;
+      color: #202224;
+    }
+
+    /* Media Query for Smaller Screens */
+    @media (max-width: 768px) {
+      .news-section h2 {
+        font-size: 1.8rem;
+      }
+
+      .card-header {
+        font-size: 1rem;
+        padding: 12px;
+      }
+
+      .card-body {
+        font-size: 0.9rem;
+        padding: 15px;
+      }
+
+      .card-footer {
+        font-size: 0.8rem;
+        padding: 8px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .news-section h2 {
+        font-size: 1.6rem;
+        margin-bottom: 30px;
+      }
+
+      .news-container {
+        gap: 15px;
+      }
+
+      .card-header {
+        font-size: 1rem;
+      }
+
+      .card-body {
+        font-size: 0.85rem;
+        padding: 12px;
+      }
+
+      .card-footer {
+        font-size: 0.75rem;
+        padding: 5px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<section class="news-section">
+  <h2>Currency Market Updates</h2>
+  <div class="news-container">
+
+    <div class="news-card">
+      <div class="card-header">USD to EUR Analysis</div>
+      <div class="card-body">
+        <p>Recent movements in the USD/EUR currency pair show a strong dollar as US economic data continues to outperform expectations.</p>
+      </div>
+      <div class="card-footer">Published: 12 May, 2025</div>
+    </div>
+
+    <div class="news-card">
+      <div class="card-header">GBP/USD Trends</div>
+      <div class="card-body">
+        <p>GBP/USD reached a new high following the announcement of improved employment data in the UK. Analysts remain optimistic for the pound.</p>
+      </div>
+      <div class="card-footer">Published: 12 May, 2025</div>
+    </div>
+
+    <div class="news-card">
+      <div class="card-header">JPY Outlook</div>
+      <div class="card-body">
+        <p>The Bank of Japan's recent statements on maintaining low interest rates have resulted in further weakening of the yen, impacting global markets.</p>
+      </div>
+      <div class="card-footer">Published: 12 May, 2025</div>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>
